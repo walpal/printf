@@ -1,28 +1,71 @@
 #include <stdlib.h>
-#include "main.h"
+#include <unistd.h>
+
 
 /**
- * *create_array - creates an array of integers
- * @min: minimum range of values stored
- * @max: maximum range of values stored and number of elements
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
  *
- * Return: pointer to the new array
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-char *create_array(unsigned int size, char c)
+int _putchar(char c)
 {
-	int *ptr;
-	int i, size;
+	return (write(1, &c, 1));
+}
+/**
+ *_strlen - reset number
+ *Description: This function return a length for some string
+ *@s: pointer char
+ *Return: int length
+ */
+int _strlen(char *s)
+{
+	int len = 0;
 
-	if (size = 0)
-		return (NULL);
+	while (*s++)
+	{
+		len++;
+	}
+	return (len);
+}
+/**
+ *_puts - print string
+ *Description: print some string
+ *@str: pointer char
+ *Return: Nothing
+ */
+void _puts(char *str)
+{
+	int i;
 
-	ptr = malloc(sizeof(char) * size);
+	for (i = 0; i < _strlen(str); i++)
+	{
+		_putchar(str[i]);
+	}
+}
+/**
+ *convert_to - convert numbers
+ *Description: This function convert numbers to other formats
+ *decimal, octal, hexadecimal, binary etc..
+ *@representation: char representation[] = "0123456789ABCDEF";
+ *@num: num to tranasform
+ *@base: base to transform num
+ *Return: number into char pointer
+ */
+char *convert_to(char representation[], unsigned int num, int base)
+{
+	char *ptr;
+	static char buffer[128];
+	int mod = 0;
 
-	if (ptr == NULL)
-		return (NULL);
+	ptr = &buffer[127];
+	*ptr = '\0';
 
-	for (i = 0; min <= max; i++)
-		ptr[i] = min++;
-
+	do {
+		mod = num % base;
+		*--ptr = representation[mod];
+		num /= base;
+	} while (num != 0);
 	return (ptr);
 }
